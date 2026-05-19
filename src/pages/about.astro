@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../consts';
+---
+
+<BaseLayout
+  title="About"
+  description={`About ${SITE.author} and this notebook.`}
+>
+  <div class="container">
+    <header class="page-header">
+      <p class="eyebrow">About</p>
+      <h1 class="page-title">A few words about this notebook</h1>
+    </header>
+
+    <div class="prose">
+      {/* Placeholder — replace with your own about copy. */}
+      <p>
+        Hi, I'm {SITE.author}. I'm a software engineer based in Seoul. I started
+        this site as a place to think out loud — short essays on AI, the tools
+        I'm building with, and the way good design slowly rubs off on the
+        software I write.
+      </p>
+
+      <p>
+        I tend to keep posts small and write them in one sitting. The goal
+        isn't to publish often, it's to leave behind a trail I can walk back
+        through later. If something here helps you, that's a bonus.
+      </p>
+
+      <h2>Elsewhere</h2>
+      <ul>
+        <li>X / Twitter — <a href="https://x.com/" rel="noopener">@yourhandle</a></li>
+        <li>GitHub — <a href="https://github.com/" rel="noopener">github.com/yourhandle</a></li>
+        <li>Email — <a href="mailto:you@example.com">you@example.com</a></li>
+      </ul>
+
+      <h2>Colophon</h2>
+      <p>
+        Built with <a href="https://astro.build">Astro</a>, hosted on GitHub
+        Pages. Type is set in the system sans for UI and a humanist serif for
+        body text. The accent color is a faded sage, picked to feel like a
+        Midori notebook in soft afternoon light.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header {
+    margin: 1rem 0 2rem;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .page-title {
+    font-family: var(--font-sans);
+    font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2rem);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin: 0.5rem 0 0;
+  }
+</style>

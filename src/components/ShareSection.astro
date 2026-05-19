@@ -1,0 +1,92 @@
+---
+interface Props {
+  title: string;
+  url: string;
+}
+
+const { title, url } = Astro.props;
+
+const twitterIntent =
+  `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}` +
+  `&url=${encodeURIComponent(url)}`;
+---
+
+<section class="share" aria-label="Share this article">
+  <span class="share-label">Share</span>
+  <button
+    type="button"
+    class="share-btn"
+    data-share-url={url}
+    aria-label="Copy link to this article"
+  >
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M10 13a5 5 0 0 0 7.07 0l3.54-3.54a5 5 0 1 0-7.07-7.07L11.5 4.43"></path>
+      <path d="M14 11a5 5 0 0 0-7.07 0l-3.54 3.54a5 5 0 1 0 7.07 7.07L12.5 19.57"></path>
+    </svg>
+    <span class="label">Copy link</span>
+  </button>
+  <a class="share-btn" href={twitterIntent} target="_blank" rel="noopener noreferrer" aria-label="Share on X (Twitter)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18.244 2H21l-6.52 7.45L22 22h-6.84l-4.77-6.24L4.84 22H2.08l6.98-7.97L2 2h6.98l4.3 5.69L18.24 2zm-1.2 18.27h1.66L7.06 3.64H5.28l11.76 16.63z"/>
+    </svg>
+    <span class="label">Share on X</span>
+  </a>
+</section>
+
+<style>
+  .share {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .share-label {
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-right: 0.3rem;
+  }
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.84rem;
+    color: var(--color-text-muted);
+    background: transparent;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .share-btn:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+  .share-btn svg { flex-shrink: 0; }
+  .share-btn .label { white-space: nowrap; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('button.share-btn[data-share-url]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const url = btn.dataset.shareUrl ?? window.location.href;
+      const label = btn.querySelector('.label');
+      if (!label) return;
+      const original = label.textContent;
+      try {
+        await navigator.clipboard.writeText(url);
+        label.textContent = 'Copied';
+      } catch {
+        label.textContent = 'Press ⌘+C';
+      }
+      setTimeout(() => { label.textContent = original; }, 1800);
+    });
+  });
+</script>

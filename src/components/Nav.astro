@@ -1,0 +1,147 @@
+---
+const base = import.meta.env.BASE_URL;
+const link = (p: string) => `${base.replace(/\/$/, '')}/${p.replace(/^\//, '')}`.replace(/\/+$/, '/') || '/';
+
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isActive = (href: string) => {
+  const normalized = href.replace(/\/+$/, '') || '/';
+  if (normalized === '/') return path === '/' || path === base.replace(/\/$/, '');
+  return path.startsWith(normalized);
+};
+
+const items = [
+  { href: link('/'), label: 'Home' },
+  { href: link('/articles/'), label: 'Articles' },
+  { href: link('/about/'), label: 'About' },
+];
+---
+
+<header class="site-header">
+  <div class="container-wide nav-row">
+    <a class="brand" href={link('/')}>
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Bbumi</span>
+    </a>
+
+    <nav aria-label="Primary">
+      <ul class="nav-list">
+        {items.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={['nav-link', { active: isActive(item.href) }]}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <button
+      id="theme-toggle"
+      class="theme-toggle"
+      type="button"
+      aria-label="Toggle color theme"
+      title="Toggle color theme"
+    >
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+      </svg>
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: saturate(140%) blur(6px);
+  }
+  .nav-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: 64px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+  }
+  .brand:hover { color: var(--color-accent); }
+  .brand-mark {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    display: inline-block;
+  }
+  .brand-name { font-size: 0.98rem; }
+
+  nav { margin-left: auto; }
+  .nav-list {
+    display: flex;
+    gap: 1.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-link {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid transparent;
+  }
+  .nav-link:hover { color: var(--color-text); }
+  .nav-link.active {
+    color: var(--color-text);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border-radius: 50%;
+    color: var(--color-text-muted);
+  }
+  .theme-toggle:hover { color: var(--color-accent); }
+  .icon-sun, .icon-moon { display: none; }
+  :root[data-theme="dark"] .icon-sun { display: block; }
+  :root:not([data-theme="dark"]) .icon-moon { display: block; }
+
+  @media (max-width: 540px) {
+    .nav-list { gap: 1rem; }
+    .nav-link { font-size: 0.88rem; }
+    .brand-name { display: none; }
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('theme-toggle');
+  btn?.addEventListener('click', () => {
+    const root = document.documentElement;
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch {}
+  });
+</script>
