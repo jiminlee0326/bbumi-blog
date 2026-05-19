@@ -29,6 +29,8 @@
                "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-serif: ui-serif, Georgia, Charter, "Iowan Old Style",
                 "Source Serif Pro", Cambria, serif;
+  --font-hand: "Caveat", "Bradley Hand", "Apple Chancery", "Brush Script MT",
+               cursive;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
                "Liberation Mono", monospace;
 
@@ -72,9 +74,9 @@ body {
   margin: 0;
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: var(--font-serif);
-  font-size: 1.0625rem; /* 17px */
-  line-height: 1.7;
+  font-family: var(--font-hand);
+  font-size: 1.125rem; /* 18px — Caveat reads smaller at the same px */
+  line-height: 1.65;
   font-feature-settings: "kern", "liga";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -132,11 +134,11 @@ main { padding: 3rem 0 5rem; }
 /* -- typography helpers --------------------------------------- */
 
 .eyebrow {
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-family: var(--font-hand);
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--color-text-muted);
 }
 
@@ -148,7 +150,7 @@ main { padding: 3rem 0 5rem; }
 /* -- prose (rendered markdown) -------------------------------- */
 
 .prose {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: 1.0625rem;
   line-height: 1.75;
   color: var(--color-text);

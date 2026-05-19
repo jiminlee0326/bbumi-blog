@@ -46,6 +46,13 @@ const faviconHref = `${base.replace(/\/$/, '')}/favicon.svg`;
     <link rel="alternate" type="application/rss+xml" title={SITE.title} href={rssHref} />
     <link rel="sitemap" href={sitemapHref} />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <meta property="og:type" content={type} />
     <meta property="og:title" content={title ?? SITE.title} />
     <meta property="og:description" content={description} />
@@ -94,8 +101,8 @@ const faviconHref = `${base.replace(/\/$/, '')}/favicon.svg`;
       .site-footer {
         border-top: 1px solid var(--color-border);
         padding: 2rem 0;
-        font-family: var(--font-sans);
-        font-size: 0.82rem;
+        font-family: var(--font-hand);
+        font-size: 1.05rem;
         color: var(--color-text-muted);
       }
       .footer-row {

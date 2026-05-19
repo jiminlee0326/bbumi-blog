@@ -77,9 +77,9 @@ const items = [
     align-items: center;
     gap: 0.55rem;
     text-decoration: none;
-    font-family: var(--font-sans);
+    font-family: var(--font-hand);
     font-weight: 600;
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
     color: var(--color-text);
   }
   .brand:hover { color: var(--color-accent); }
@@ -90,7 +90,7 @@ const items = [
     background: var(--color-accent);
     display: inline-block;
   }
-  .brand-name { font-size: 0.98rem; }
+  .brand-name { font-size: 1.35rem; line-height: 1; }
 
   nav { margin-left: auto; }
   .nav-list {
@@ -101,8 +101,8 @@ const items = [
     padding: 0;
   }
   .nav-link {
-    font-family: var(--font-sans);
-    font-size: 0.92rem;
+    font-family: var(--font-hand);
+    font-size: 1.15rem;
     color: var(--color-text-muted);
     text-decoration: none;
     padding: 0.25rem 0;
@@ -131,7 +131,7 @@ const items = [
 
   @media (max-width: 540px) {
     .nav-list { gap: 1rem; }
-    .nav-link { font-size: 0.88rem; }
+    .nav-link { font-size: 1.05rem; }
     .brand-name { display: none; }
   }
 </style>
