@@ -1,7 +1,7 @@
 // Edit these to personalize the site. Used in <head> metadata, the home
 // hero, the RSS feed, and the footer.
 export const SITE = {
-  title: 'Bbumi',
+  title: 'Finelearning',
   tagline: 'A small notebook on AI, code, and craft.',
   description:
     'A small notebook on AI, code, and craft — personal essays and notes by Bbumi.',

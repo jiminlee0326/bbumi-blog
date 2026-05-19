@@ -25,12 +25,11 @@
   --color-code-bg: #efe9dc;
 
   /* typography */
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-               "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-serif: ui-serif, Georgia, Charter, "Iowan Old Style",
-                "Source Serif Pro", Cambria, serif;
-  --font-hand: "Caveat", "Bradley Hand", "Apple Chancery", "Brush Script MT",
-               cursive;
+  --font-sans: "Source Sans 3", "Source Sans Pro", system-ui, -apple-system,
+               BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+               sans-serif;
+  --font-display: "Ubuntu", system-ui, -apple-system, BlinkMacSystemFont,
+                  "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
                "Liberation Mono", monospace;
 
@@ -74,9 +73,9 @@ body {
   margin: 0;
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: var(--font-hand);
-  font-size: 1.125rem; /* 18px — Caveat reads smaller at the same px */
-  line-height: 1.65;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.7;
   font-feature-settings: "kern", "liga";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -134,11 +133,11 @@ main { padding: 3rem 0 5rem; }
 /* -- typography helpers --------------------------------------- */
 
 .eyebrow {
-  font-family: var(--font-hand);
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0;
-  text-transform: none;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--color-text-muted);
 }
 
@@ -159,8 +158,8 @@ main { padding: 3rem 0 5rem; }
 .prose > * + * { margin-top: 1.1em; }
 
 .prose h2, .prose h3, .prose h4 {
-  font-family: var(--font-sans);
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-weight: 700;
   line-height: 1.3;
   letter-spacing: -0.005em;
   margin-top: 2.4em;

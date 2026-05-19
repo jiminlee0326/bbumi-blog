@@ -63,24 +63,24 @@ const shareUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString()
 <style>
   .article-header { margin: 0.5rem 0 2rem; }
   .article-title {
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.4rem);
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.18;
     letter-spacing: -0.018em;
     margin: 0.4rem 0 0.5rem;
     color: var(--color-text);
   }
   .article-subtitle {
-    font-family: var(--font-hand);
-    font-size: 1.4rem;
-    line-height: 1.4;
+    font-family: var(--font-sans);
+    font-size: 1.12rem;
+    line-height: 1.55;
     color: var(--color-text-muted);
     margin: 0 0 0.9rem;
   }
   .article-date {
-    font-family: var(--font-hand);
-    font-size: 1.05rem;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
     color: var(--color-text-faint);
     margin: 0;
   }

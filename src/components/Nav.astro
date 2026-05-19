@@ -1,12 +1,18 @@
 ---
+import { SITE } from '../consts';
+
 const base = import.meta.env.BASE_URL;
 const link = (p: string) => `${base.replace(/\/$/, '')}/${p.replace(/^\//, '')}`.replace(/\/+$/, '/') || '/';
 
+const homeHref = link('/').replace(/\/+$/, '') || '/';
 const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
 const isActive = (href: string) => {
   const normalized = href.replace(/\/+$/, '') || '/';
-  if (normalized === '/') return path === '/' || path === base.replace(/\/$/, '');
-  return path.startsWith(normalized);
+  // Home: must match exactly — otherwise every sub-page would match the base prefix.
+  if (normalized === homeHref) return path === homeHref || path === '/';
+  // Other links: exact match or a sub-path of it.
+  return path === normalized || path.startsWith(normalized + '/');
 };
 
 const items = [
@@ -20,7 +26,7 @@ const items = [
   <div class="container-wide nav-row">
     <a class="brand" href={link('/')}>
       <span class="brand-mark" aria-hidden="true"></span>
-      <span class="brand-name">Bbumi</span>
+      <span class="brand-name">{SITE.title}</span>
     </a>
 
     <nav aria-label="Primary">
@@ -77,9 +83,9 @@ const items = [
     align-items: center;
     gap: 0.55rem;
     text-decoration: none;
-    font-family: var(--font-hand);
-    font-weight: 600;
-    letter-spacing: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.01em;
     color: var(--color-text);
   }
   .brand:hover { color: var(--color-accent); }
@@ -90,7 +96,7 @@ const items = [
     background: var(--color-accent);
     display: inline-block;
   }
-  .brand-name { font-size: 1.35rem; line-height: 1; }
+  .brand-name { font-size: 1.02rem; }
 
   nav { margin-left: auto; }
   .nav-list {
@@ -101,8 +107,9 @@ const items = [
     padding: 0;
   }
   .nav-link {
-    font-family: var(--font-hand);
-    font-size: 1.15rem;
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    font-weight: 500;
     color: var(--color-text-muted);
     text-decoration: none;
     padding: 0.25rem 0;
@@ -131,7 +138,7 @@ const items = [
 
   @media (max-width: 540px) {
     .nav-list { gap: 1rem; }
-    .nav-link { font-size: 1.05rem; }
+    .nav-link { font-size: 0.88rem; }
     .brand-name { display: none; }
   }
 </style>
